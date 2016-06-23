@@ -9,9 +9,9 @@ Gem::Specification.new do |spec|
   spec.authors       = ["marcy"]
   spec.email         = ["masashi.oyamada@gmail.com"]
 
-  spec.summary       = %q{}
-  spec.description   = %q{}
-  spec.homepage      = ""
+  spec.summary       = %q{A simple query builder for Amazon Cloudsearch Structured query parser.}
+  spec.description   = %q{A simple query builder for Amazon Cloudsearch Structured query parser.}
+  spec.homepage      = "https://github.com/marcy/csquery"
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
   # to allow pushing to a single host or delete this section to allow pushing to any host.
