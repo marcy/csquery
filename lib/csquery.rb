@@ -105,15 +105,13 @@ module Csquery
       end
 
       def to_value
-        if @name
-          return "#{@name}:#{@value}"
-        end
+        return "#{@name}:#{@value}" if @name
 
         @value
       end
 
       def to_s
-        to_value()
+        to_value
       end
     end
 
@@ -133,7 +131,7 @@ module Csquery
       end
 
       def query
-        "(#{@operator}#{Structured::format_options(@options)} #{@fields.map(&:to_s).join(' ')})"
+        "(#{@operator}#{Structured::format_options(@options)} #{@fields.map(&:to_s).join(' ')})".gsub(/\s+/, ' ')
       end
 
       def to_s
