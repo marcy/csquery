@@ -4,7 +4,7 @@ module Csquery
   class Structured
     class << self
       def field(value, name = nil)
-        FieldValue.new(value, name)
+        FieldValue.new(value: value, name: name)
       end
 
       def and_(*args, **kwargs)
