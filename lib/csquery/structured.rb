@@ -9,7 +9,6 @@ module Csquery
         Expression.new('and', *args, options: _get_option([:boost], kwargs), **kwargs)
       end
 
-
       def not_(*args, **kwargs)
         Expression.new('not', *args, options: _get_option([:field, :boost], kwargs), **kwargs)
       end

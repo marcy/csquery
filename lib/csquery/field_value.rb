@@ -3,9 +3,11 @@ module Csquery
     attr_reader :name, :value
 
     def initialize(value:, name: nil)
-      if value.is_a? Array and value[0].is_a? Hash
-        @name = value[0].keys[0]
-        @value = Structured.format_value(value[0].values[0])
+      value = value[0] if value.is_a?(Array) and value[0].is_a?(Hash)
+
+      if value.is_a?(Hash)
+        @name = value.keys[0]
+        @value = Structured.format_value(value.values[0])
       else
         @name = name
         @value = Structured.format_value(value)
