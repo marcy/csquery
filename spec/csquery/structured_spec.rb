@@ -44,6 +44,20 @@ describe Csquery::Structured do
     end
   end
 
+  describe '.not_' do
+    specify do
+      expect(Csquery::Structured.not_(
+              Csquery::Structured.and_(actors: 'Harrison Ford', year: ['', 2010])
+            ).query).to eq("(not (and actors:'Harrison Ford' year:{,2010]))")
+
+
+      expect(Csquery::Structured.not_(
+              Csquery::Structured.and_(actors: 'Harrison Ford', year: ['', 2010]),
+              boost: 2
+            ).query).to eq("(not boost=2 (and actors:'Harrison Ford' year:{,2010]))")
+    end
+  end
+
   describe '.range_' do
     specify do
       expect(Csquery::Structured.range_([1990, 2000]).query).to eq('(range [1990,2000])')
