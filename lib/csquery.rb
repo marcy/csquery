@@ -100,8 +100,13 @@ module Csquery
 
     class FieldValue
       def initialize(value:, name: nil)
-        @name = name
-        @value = Structured.format_value(value)
+        if value.is_a? Array and value[0].is_a? Hash
+          @name = value[0].keys[0]
+          @value = Structured.format_value(value[0].values[0])
+        else
+          @name = name
+          @value = Structured.format_value(value)
+        end
       end
 
       def to_value
@@ -122,7 +127,11 @@ module Csquery
         @fields = []
 
         args.each do |a|
-          @fields << FieldValue.new(value: a)
+          if a.is_a? FieldValue
+            @fields << a
+          else
+            @fields << FieldValue.new(value: a)
+          end
         end
 
         kwargs.sort_by {|k, _| k }.each do |k, v|

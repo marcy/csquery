@@ -9,13 +9,13 @@ describe Csquery do
     specify do
       expect(Csquery::Structured.and_(title: 'star', actors: 'Harrison Ford', year: ['', 2000]).query).to eq("(and actors:'Harrison Ford' title:'star' year:{,2000])")
 
-      #expect(Csquery::Structured.and_(['title' => 'star'], ['title' => 'star2']).query).to eq("(and title:'star' title:'star2')")
+      expect(Csquery::Structured.and_(['title' => 'star'], ['title' => 'star2']).query).to eq("(and title:'star' title:'star2')")
 
 
-      #expect(Csquery::Structured.and_(Csquery::Structured.field('star', 'title'),
-      #                                Csquery::Structured.field('star2', 'title')).query).to eq("(and title:'star' title:'star2')")
+      expect(Csquery::Structured.and_(Csquery::Structured.field('star', 'title'),
+                                      Csquery::Structured.field('star2', 'title')).query).to eq("(and title:'star' title:'star2')")
 
-      #expect(Csquery::Structured.and_(['title' => 'star'], ['title' => 'star2'], boost: 2).query).to eq("(and boost=2 title:'star' title:'star2')")
+      expect(Csquery::Structured.and_(['title' => 'star'], ['title' => 'star2'], boost: 2).query).to eq("(and boost=2 title:'star' title:'star2')")
     end
 
     context 'complex query' do
