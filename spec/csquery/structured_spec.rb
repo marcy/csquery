@@ -85,6 +85,16 @@ describe Csquery::Structured do
     end
   end
 
+  describe '.term_' do
+    specify do
+      expect(Csquery::Structured.term_('star').query).to eq("(term 'star')")
+
+      expect(Csquery::Structured.term_(2000).query).to eq('(term 2000)')
+
+      expect(Csquery::Structured.term_(2000, field: 'year', boost: 2).query).to eq('(term field=year boost=2 2000)')
+    end
+  end
+
   describe '.range_' do
     specify do
       expect(Csquery::Structured.range_([1990, 2000]).query).to eq('(range [1990,2000])')

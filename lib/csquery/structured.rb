@@ -18,7 +18,6 @@ module Csquery
         Expression.new('or', *args, options: _get_option([:boost], kwargs), **kwargs)
       end
 
-
       def term_(*args, **kwargs)
         Expression.new('term', *args, options: _get_option([:field, :boost], kwargs), **kwargs)
       end
@@ -43,6 +42,10 @@ module Csquery
       def format_value(value)
         if value.is_a? Array
           return format_range_values(*value)
+        end
+
+        if value.is_a? Numeric
+          return "#{value}"
         end
 
         if value.is_a? Expression
