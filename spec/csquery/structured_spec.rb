@@ -68,6 +68,14 @@ describe Csquery::Structured do
     end
   end
 
+  describe '.phrase_' do
+    specify do
+      expect(Csquery::Structured.phrase_('teenage girl').query).to eq("(phrase 'teenage girl')")
+
+      expect(Csquery::Structured.phrase_('teenage girl', boost: 2, field: 'plot').query).to eq("(phrase field=plot boost=2 'teenage girl')")
+    end
+  end
+
   describe '.range_' do
     specify do
       expect(Csquery::Structured.range_([1990, 2000]).query).to eq('(range [1990,2000])')
