@@ -1,6 +1,7 @@
 # Csquery
 
 [![Build Status](https://travis-ci.org/marcy/csquery.svg?branch=master)](https://travis-ci.org/marcy/csquery)
+[![Gem Version](https://badge.fury.io/rb/csquery.svg)](https://badge.fury.io/rb/csquery)
 
 Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/csquery`. To experiment with that code, run `bin/console` for an interactive prompt.
 
