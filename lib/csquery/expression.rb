@@ -5,11 +5,11 @@ module Csquery
       @options = options
       @fields = []
 
-      args.each do |a|
-        if a.is_a? FieldValue
-          @fields << a
+      args.each do |arg|
+        if arg.is_a? FieldValue
+          @fields << arg
         else
-          @fields << FieldValue.new(value: a)
+          @fields << FieldValue.new(value: arg)
         end
       end
 

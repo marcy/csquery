@@ -29,7 +29,6 @@ module Csquery
         Expression.new('phrase', *args, options: _get_option([:field, :boost], kwargs), **kwargs)
       end
 
-
       def prefix_(*args, **kwargs)
         Expression.new('prefix', *args, options: _get_option([:field, :boost], kwargs), **kwargs)
       end
@@ -39,17 +38,11 @@ module Csquery
       end
 
       def format_value(value)
-        if value.is_a? Array
-          return format_range_values(*value)
-        end
+        return format_range_values(*value) if value.is_a?(Array)
 
-        if value.is_a? Numeric
-          return "#{value}"
-        end
+        return "#{value}" if value.is_a?(Numeric)
 
-        if value.is_a? Expression
-          return value.query
-        end
+        return value.query if value.is_a?(Expression)
 
         value = value.to_s
 
@@ -65,9 +58,7 @@ module Csquery
       end
 
       def format_options(options={})
-        unless options
-          return ''
-        end
+        return '' unless options
 
         ' ' + options.map{|k,v| "#{k}=#{v}"}.join(' ')
       end
@@ -78,13 +69,13 @@ module Csquery
         string.gsub(/\\|\'/) {|word| "\\#{word}" }
       end
 
-      def format_range_values(start, end_=nil)
-        a = [nil, ''].include?(start) ? '{' : '['
-        b = [nil, ''].include?(start) ? '' : start
-        c = [nil, ''].include?(end_) ? '' : end_
-        d = [nil, ''].include?(end_) ? '}' : ']'
+      def format_range_values(start_val, end_val = nil)
+        start_paren = [nil, ''].include?(start_val) ? '{' : '['
+        start_value = [nil, ''].include?(start_val) ? '' : start_val
+        end_value = [nil, ''].include?(end_val) ? '' : end_val
+        end_paren = [nil, ''].include?(end_val) ? '}' : ']'
 
-        "#{a}#{b},#{c}#{d}"
+        "#{start_paren}#{start_value},#{end_value}#{end_paren}"
       end
 
       def _get_option(keys, options)
