@@ -76,6 +76,15 @@ describe Csquery::Structured do
     end
   end
 
+
+  describe '.prefix_' do
+    specify do
+      expect(Csquery::Structured.prefix_('star').query).to eq("(prefix 'star')")
+
+      expect(Csquery::Structured.prefix_('star', boost: 2, field: 'title').query).to eq("(prefix field=title boost=2 'star')")
+    end
+  end
+
   describe '.range_' do
     specify do
       expect(Csquery::Structured.range_([1990, 2000]).query).to eq('(range [1990,2000])')
