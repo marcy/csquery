@@ -58,6 +58,16 @@ describe Csquery::Structured do
     end
   end
 
+  describe '.near_' do
+    specify do
+      expect(Csquery::Structured.near_('teenage vampire').query).to eq("(near 'teenage vampire')")
+
+      expect(Csquery::Structured.near_('teenage vampire',
+                                       boost: 2, field: 'plot', distance: 2
+                                      ).query).to eq("(near field=plot distance=2 boost=2 'teenage vampire')")
+    end
+  end
+
   describe '.range_' do
     specify do
       expect(Csquery::Structured.range_([1990, 2000]).query).to eq('(range [1990,2000])')
