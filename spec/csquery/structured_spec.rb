@@ -1,6 +1,14 @@
 require 'spec_helper'
 
 describe Csquery::Structured do
+  describe '.field' do
+    specify do
+      expect(Csquery::Structured.field('value').to_s).to eq("'value'")
+
+      expect(Csquery::Structured.field('value', 'name').to_s).to eq("name:'value'")
+    end
+  end
+
   describe '.and_' do
     specify do
       expect(Csquery::Structured.and_(title: 'star', actors: 'Harrison Ford', year: ['', 2000]).query).to eq("(and actors:'Harrison Ford' title:'star' year:{,2000])")
