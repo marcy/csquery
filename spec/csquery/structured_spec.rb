@@ -118,7 +118,13 @@ describe Csquery::Structured do
       expect(Csquery::Structured.range_('[1990,}').query).to eq('(range [1990,})')
 
       expect(Csquery::Structured.range_(['1967-01-31T23:20:50.650Z',
-                                         '1967-01-31T23:59:59.999Z']).query).to eq('(range [1967-01-31T23:20:50.650Z,1967-01-31T23:59:59.999Z])')
+                                         '1967-01-31T23:59:59.999Z']).query).to eq("(range ['1967-01-31T23:20:50.650Z','1967-01-31T23:59:59.999Z'])")
+
+      expect(Csquery::Structured.range_(['1967-01-31T23:20:50.650Z',
+                                         '']).query).to eq("(range ['1967-01-31T23:20:50.650Z',})")
+
+      expect(Csquery::Structured.range_(['90,-180',
+                                         '-89.999,179.999']).query).to eq("(range ['90,-180','-89.999,179.999'])")
 
       expect(Csquery::Structured.range_([1990, 2000], field: 'date', boost: 2).query).to eq('(range field=date boost=2 [1990,2000])')
     end
