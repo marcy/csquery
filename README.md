@@ -27,6 +27,22 @@ Or install it yourself as:
 ## Usage
 
 ```ruby
+builder = Csquery::Structured::Builder.new(:and_) do
+  not_('test', field:'genres')
+
+  or_ do
+    term_('star', field:'title', boost:2)
+    term_('star', field:'plot')
+  end
+end
+
+builder.query
+# => "(and (not field=genres 'test') (or (term field=title boost=2 'star') (term field=plot 'star')))"
+```
+
+You can also build a query manually without the DSL:
+
+```ruby
 Csquery::Structured.and_(
     Csquery::Structured.not_('test', field:'genres'),
     Csquery::Structured.or_(
@@ -45,4 +61,4 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/csquery. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
+Bug reports and pull requests are welcome on GitHub at https://github.com/marcy/csquery. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
