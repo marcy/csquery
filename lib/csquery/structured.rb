@@ -71,8 +71,8 @@ module Csquery
 
       def format_range_values(start_val, end_val = nil)
         start_paren = [nil, ''].include?(start_val) ? '{' : '['
-        start_value = [nil, ''].include?(start_val) ? '' : start_val
-        end_value = [nil, ''].include?(end_val) ? '' : end_val
+        start_value = [nil, ''].include?(start_val) ? '' : format_value(start_val)
+        end_value = [nil, ''].include?(end_val) ? '' : format_value(end_val)
         end_paren = [nil, ''].include?(end_val) ? '}' : ']'
 
         "#{start_paren}#{start_value},#{end_value}#{end_paren}"
