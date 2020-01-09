@@ -8,9 +8,9 @@ module Csquery
         instance_exec(&block) if block_given?
       end
 
-      def method_missing(m, *args, &block)
+      def method_missing(m, *args, **kwargs, &block)
         args = ExpressionBuilder.new(&block).expressions if block_given?
-        @expressions << Structured.public_send(m, *args)
+        @expressions << Structured.public_send(m, *args, **kwargs)
       end
 
       def or_concat_(&block)
