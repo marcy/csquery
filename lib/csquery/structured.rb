@@ -48,6 +48,7 @@ module Csquery
 
         if(value.start_with?('(') and value.end_with?(')'))\
           or(value.start_with?('{') and value.end_with?(']'))\
+          or(value.start_with?('{') and value.end_with?('}'))\
           or(value.start_with?('[') and value.end_with?('}'))\
           or(value.start_with?('[') and value.end_with?(']'))
 
