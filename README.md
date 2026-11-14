@@ -3,10 +3,9 @@
 [![CI](https://github.com/marcy/csquery/actions/workflows/ci.yml/badge.svg)](https://github.com/marcy/csquery/actions/workflows/ci.yml)
 [![Gem Version](https://badge.fury.io/rb/csquery.svg)](https://badge.fury.io/rb/csquery)
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/csquery`. To experiment with that code, run `bin/console` for an interactive prompt.
+A simple query builder for Amazon CloudSearch Structured Query in Ruby. It provides a DSL to compose structured queries programmatically.
 
-A simple query builder for Amazon Cloudsearch Structured query parser for ruby.
-see: https://github.com/tell-k/csquery
+Based on [tell-k/csquery](https://github.com/tell-k/csquery).
 
 ## Installation
 
