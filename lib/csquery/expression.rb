@@ -19,7 +19,11 @@ module Csquery
     end
 
     def query
-      "(#{@operator}#{Structured::format_options(@options)} #{@fields.map(&:to_s).join(' ')})".gsub(/\s+/, ' ')
+      options = Structured.format_options(@options).strip
+      parts = [@operator]
+      parts << options unless options.empty?
+      parts.concat(@fields.map(&:to_s))
+      "(#{parts.join(' ')})"
     end
 
     def to_s
